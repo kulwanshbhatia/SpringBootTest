@@ -22,6 +22,7 @@ pipeline {
             steps{
                 script{
                     sh 'docker build -t springboot .'
+                    sh 'docker tag springboot:latest 706274417810.dkr.ecr.ap-south-1.amazonaws.com/springboot:latest'
                 }
             }
         }
