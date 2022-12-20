@@ -2,6 +2,9 @@ pipeline {
     agent {
         label 'sana_123'
     }
+    environment {
+        registry = "706274417810.dkr.ecr.ap-south-1.amazonaws.com/springboot"
+    }
        stages{
           stage('git'){
            steps{
