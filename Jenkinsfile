@@ -21,7 +21,7 @@ pipeline {
         stage('docker build'){
             steps{
                 script{
-                    sh 'docker build -t sanataba/springboot .'
+                    sh 'docker build -t springboot .'
                 }
             }
         }
