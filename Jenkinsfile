@@ -42,11 +42,23 @@ pipeline {
               sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 706274417810.dkr.ecr.ap-south-1.amazonaws.com'
           }
       } 
-             stage('DockerPush to AWS ECR'){
+         stage('DockerPush to AWS ECR'){
             steps{
                 sh 'docker push 706274417810.dkr.ecr.ap-south-1.amazonaws.com/springboot:latest'
             }
         } 
+         stage ('eks Deploy') {
+           steps {
+               script{
+                    withKubeConfig([credentialsId: 'K8s']) 
+                    {
+        
+              sh 'kubectl apply -f Deployment.yaml'
+        }
+        }
+    
+      }
+}
                   
                   
     }
