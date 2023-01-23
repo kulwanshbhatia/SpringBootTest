@@ -3,7 +3,7 @@ pipeline {
         label 'new123'
     }
     environment {
-        registry = "706274417810.dkr.ecr.ap-south-1.amazonaws.com/springboot"
+        registry = "876270579511.dkr.ecr.eu-central-1.amazonaws.com/demo"
     }
        stages{
           stage('git'){
@@ -22,31 +22,32 @@ pipeline {
             steps{
                 script{
                     sh 'docker build -t springboot .'
-                    sh 'docker tag springboot:latest 706274417810.dkr.ecr.ap-south-1.amazonaws.com/springboot:latest'
+                    sh 'docker tag demo:latest 876270579511.dkr.ecr.eu-central-1.amazonaws.com/demo:latest'
                 }
             }
         }
-  /*     stage('push docker image'){
+       stage('push docker image'){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-                    sh 'docker login -u sanataba -p ${dockerhubpwd}'
-                    sh 'docker push sanataba/springboot'
+                    sh 'docker login -u kulwanshbhatia -p ${dockerhubpwd}'
+                    sh 'docker push kulwanshbhatia/demo'
 }
                     
                 }
             }
-        }   */
+        }   
          stage('aws login'){
             steps{
-              sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 706274417810.dkr.ecr.ap-south-1.amazonaws.com'
+              sh 'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 876270579511.dkr.ecr.eu-central-1.amazonaws.com'
           }
       } 
          stage('DockerPush to AWS ECR'){
             steps{
-                sh 'docker push 706274417810.dkr.ecr.ap-south-1.amazonaws.com/springboot:latest'
+                sh 'docker push 876270579511.dkr.ecr.eu-central-1.amazonaws.com/demo:latest'
             }
         } 
+           /*
          stage ('eks Deploy') {
            steps {
                script{
@@ -56,7 +57,7 @@ pipeline {
               sh 'kubectl apply -f Deployment.yaml'
         }
         }
-    
+    */
       }
 }
                   
