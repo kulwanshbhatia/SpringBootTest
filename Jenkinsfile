@@ -8,7 +8,7 @@ pipeline {
        stages{
           stage('git'){
            steps{
-               checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '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', url: 'https://github.com/sanataba/SpringBootTest']]])
+               checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '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', url: 'https://github.com/kulwanshbhatia/SpringBootTest']]])
            }
         } 
           stage('Build') {
